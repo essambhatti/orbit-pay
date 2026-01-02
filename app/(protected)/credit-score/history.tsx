@@ -1,10 +1,10 @@
-import React from "react";
+import Colors from "@/constants/Colors";
+import { Spacing } from "@/constants/Spacing";
+import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-expo";
 import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { SafeAreaView, View, Text, FlatList } from "react-native";
-import Colors from "@/app/constants/Colors";
-import { Spacing } from "@/app/constants/Spacing";
+import React from "react";
+import { FlatList, SafeAreaView, Text, View } from "react-native";
 
 export default function PredictionHistory() {
   const { user } = useUser();

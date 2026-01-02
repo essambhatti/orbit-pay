@@ -1,23 +1,23 @@
-import {
-  balanceAtom,
-  indexActionSheet,
-  intentAtom,
-  walletAtom,
-} from "@/app/store/Atom";
+import { BalanceBox } from "@/components/HomeUI/BalanceBox";
+import { Widget } from "@/components/HomeUI/HomeWidget";
 import { api } from "@/convex/_generated/api";
 import { getSolBalance, loadWallet } from "@/lib/Solana/walletCreate";
+import {
+    balanceAtom,
+    indexActionSheet,
+    intentAtom,
+    walletAtom,
+} from "@/store/Atom";
 import { useAuth } from "@clerk/clerk-expo";
-import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "convex/react";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 
 import {
-  Image,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
+    Image,
+    SafeAreaView,
+    Text,
+    View,
 } from "react-native";
 
 export default function Home() {
@@ -76,7 +76,7 @@ export default function Home() {
             <Widget
               icon="send"
               label="Send"
-              disabled={solBalance <= 0}
+              // disabled={solBalance <= 0}
               onPress={() => {
                 setindexActionSheet(true);
                 setIntent("send");
@@ -109,23 +109,4 @@ export default function Home() {
   );
 }
 
-const BalanceBox = ({ label, value }: any) => (
-  <View className="w-[48%] bg-[#0B1E5B] p-4 rounded-3xl items-center">
-    <Text className="text-white font-bold opacity-80">{label}</Text>
-    <Text className="text-white text-lg font-bold mt-1">{value}</Text>
-    <Text className="text-green-400 font-bold mt-1">+ $12.61</Text>
-  </View>
-);
 
-const Widget = ({ icon, label, disabled, onPress }: any) => (
-  <TouchableOpacity
-    disabled={disabled}
-    className={`w-20 h-20 rounded-2xl items-center justify-center ${
-      disabled ? "bg-[#46484c]" : "bg-[#0B1E5B]"
-    }`}
-    onPress={onPress}
-  >
-    <Ionicons name={icon} size={26} color="white" />
-    <Text className="text-white text-xs font-extrabold mt-1">{label}</Text>
-  </TouchableOpacity>
-);
