@@ -1,7 +1,8 @@
+import ScreenHeader from "@/components/Solana/ScreenHeader";
 import { getSolBalance, loadWallet } from "@/lib/Solana/walletCreate";
 import { showToast } from "@/lib/toast";
 import * as Clipboard from "expo-clipboard";
-import { Copy, Wallet } from "lucide-react-native";
+import { Copy } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
@@ -37,28 +38,8 @@ const ReceiveSol = () => {
 
   return (
     <SafeAreaView className="flex-1  px-5 py-6">
-      {/* ================= HEADER ================= */}
-      <View>
-        <View className="flex-row items-center justify-center gap-3">
-          <View className="w-11 h-11 rounded-xl items-center justify-center">
-            <Wallet size={24} color="#86D2FF" />
-          </View>
 
-          <View>
-            <Text className="text-white text-2xl font-bold">Receive SOL</Text>
-            <Text className="text-[#dfdfdf] text-sm mt-0.5">
-              Solana blockchain
-            </Text>
-          </View>
-        </View>
-
-        <View className="mt-4 items-center justify-center">
-          <Text className="text-white/70 text-sm">Available Balance</Text>
-          <Text className="text-white text-xl font-semibold mt-1">
-            {balance !== null ? `${balance} SOL` : "--"}
-          </Text>
-        </View>
-      </View>
+      <ScreenHeader screenName="Recieve"/>
 
       {/* ================= QR CARD ================= */}
       <View className="mt-10 rounded-3xl py-8 items-center">

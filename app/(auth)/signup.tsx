@@ -1,4 +1,4 @@
-import { balanceAtom, signupAtom, walletAtom } from "@/app/store/Atom";
+import { balanceAtom, signupAtom, walletAtom } from "@/store/Atom";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useMutation } from "convex/react";
 import { Link, useRouter } from "expo-router";
@@ -6,18 +6,18 @@ import { useAtom } from "jotai";
 import * as React from "react";
 import { useEffect } from "react";
 import {
-  ImageBackground,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    ImageBackground,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { api } from "../../convex/_generated/api";
 
 import {
-  createWallet,
-  getSolBalance,
-  loadWallet,
+    createWallet,
+    getSolBalance,
+    loadWallet,
 } from "@/lib/Solana/walletCreate";
 import { showToast } from "@/lib/toast";
 const phoneRegex = /^\d{4}-\d{7}$/;

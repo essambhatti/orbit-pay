@@ -1,7 +1,7 @@
-import Colors from "@/app/constants/Colors";
-import Font from "@/app/constants/Fonts";
-import { Spacing } from "@/app/constants/Spacing";
-import { Activity } from "@/app/data";
+import Colors from "@/constants/Colors";
+import Font from "@/constants/Fonts";
+import { Spacing } from "@/constants/Spacing";
+import { Activity } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";

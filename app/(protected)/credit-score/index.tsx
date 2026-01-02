@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import Colors from "@/constants/Colors";
+import { Spacing } from "@/constants/Spacing";
+import { api } from "@/convex/_generated/api";
+import { showToast } from "@/lib/toast";
 import { useUser } from "@clerk/clerk-expo";
 import { useAction } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import React, { useState } from "react";
 import {
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
+    SafeAreaView,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
-import { Spacing } from "@/app/constants/Spacing";
-import Colors from "@/app/constants/Colors";
-import { showToast } from "@/lib/toast";
 
 export default function CreditScorePage() {
   const { user } = useUser();
