@@ -4,12 +4,7 @@ import { showToast } from "@/lib/toast";
 import * as Clipboard from "expo-clipboard";
 import { Copy } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 
 const ReceiveSol = () => {
@@ -20,7 +15,11 @@ const ReceiveSol = () => {
     (async () => {
       const wallet = await loadWallet();
       if (!wallet) {
-        showToast({ type: "error", title: "Wallet not found", message: "Create a Wallet first" });
+        showToast({
+          type: "error",
+          title: "Wallet not found",
+          message: "Create a Wallet first",
+        });
         return;
       }
 
@@ -38,10 +37,8 @@ const ReceiveSol = () => {
 
   return (
     <SafeAreaView className="flex-1  px-5 py-6">
+      <ScreenHeader screenName="Recieve" />
 
-      <ScreenHeader screenName="Recieve"/>
-
-      {/* ================= QR CARD ================= */}
       <View className="mt-10 rounded-3xl py-8 items-center">
         {receiver ? (
           <QRCode
