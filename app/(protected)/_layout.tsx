@@ -5,6 +5,8 @@ import {
   Slot,
 
 } from "expo-router";
+import Header from "@/components/HomeUI/Header";
+
 import {
   ImageBackground,
   ScrollView,
@@ -12,7 +14,6 @@ import {
 } from "react-native";
 
 import "@/global.css";
-import Header from "@/components/HomeUI/Header";
 import Navbar from "@/components/HomeUI/Navbar";
 
 export default function RootLayout() {

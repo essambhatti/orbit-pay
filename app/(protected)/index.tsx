@@ -8,8 +8,10 @@ import {
     intentAtom,
     walletAtom,
 } from "@/store/Atom";
+import { getSolanaPrice } from "@/lib/coingecko";
 import { useAuth } from "@clerk/clerk-expo";
 import { useQuery } from "convex/react";
+import { RelativePathString, router } from "expo-router";
 import { useAtom } from "jotai";
 import React, { useEffect } from "react";
 
@@ -31,6 +33,10 @@ export default function Home() {
     api.users.getUserByClerkId,
     userId ? { clerkId: userId } : "skip"
   );
+  const [solanaPrice, setSolanaPrice] = React.useState<{
+    usd: number;
+    usd_24h_change: number;
+  } | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -40,9 +46,17 @@ export default function Home() {
       setWalletAddress(address);
       setSolBalance(await getSolBalance(address));
     })();
+  });
+
+  useEffect(() => {
+    (async () => {
+      const price = await getSolanaPrice();
+      setSolanaPrice(price);
+    })();
   }, []);
 
-  const total = Number(dbUser?.balance || 0) + solBalance;
+  const solValue = solBalance * (solanaPrice?.usd || 0);
+  const total = Number(dbUser?.balance || 0) + solValue;
 
   return (
     <>
@@ -58,13 +72,19 @@ export default function Home() {
 
           {/* Balances */}
           <View className="flex-row justify-between w-full mt-6">
-            <BalanceBox label="Coins" value={`$${solBalance}`} />
+            <BalanceBox label="Coins" value={`$${solValue.toFixed(2)}`} />
             <BalanceBox label="Cash" value={`$${dbUser?.balance || 0}`} />
           </View>
 
           {/* Widgets */}
           <View className="flex-row justify-between w-full mt-6">
-            <Widget icon="swap-horizontal" label="Buy/Sell" />
+            <Widget
+              icon="bar-chart"
+              label="Analytics"
+              onPress={() => {
+                router.push("/(protected)/analytics" as RelativePathString);
+              }}
+            />
             <Widget
               icon="download"
               label="Receive"
@@ -77,6 +97,7 @@ export default function Home() {
               icon="send"
               label="Send"
               // disabled={solBalance <= 0}
+              disabled={solBalance <= 0 && !dbUser?.balance}
               onPress={() => {
                 setindexActionSheet(true);
                 setIntent("send");
@@ -96,7 +117,16 @@ export default function Home() {
           <View className="flex-1">
             <Text className="text-white font-bold">Solana</Text>
             <Text className="text-green-300 font-semibold mt-1">
-              $4.75 +3.54%
+              ${solanaPrice?.usd.toFixed(2) || "0.00"}{" "}
+              <Text
+                className={
+                  (solanaPrice?.usd_24h_change || 0) >= 0
+                    ? "text-green-300"
+                    : "text-red-400"
+                }
+              >
+                {solanaPrice?.usd_24h_change.toFixed(2) || "0.00"}%
+              </Text>
             </Text>
           </View>
 
@@ -108,5 +138,3 @@ export default function Home() {
     </>
   );
 }
-
-
