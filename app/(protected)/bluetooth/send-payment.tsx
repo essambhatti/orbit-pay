@@ -1,5 +1,5 @@
 // app/(protected)/bluetooth/send-payment.tsx
-import { walletAtom } from "@/app/store/Atom";
+import { walletAtom } from "@/store/Atom";
 import { api } from "@/convex/_generated/api";
 import { showToast } from "@/lib/toast";
 import { useUser } from "@clerk/clerk-expo";
